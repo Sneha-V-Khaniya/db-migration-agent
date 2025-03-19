@@ -1,12 +1,12 @@
 const agents = require('../base-agents');
 const executeMigration = require('../tools/execute-migration');
 
-module.exports = async function (query) {
+module.exports = async function ({query, image, mimeType}) {
     let migration, response;
 
     try {
         // Generate migration
-        migration = await agents.migrationGeneratorAgent(query);
+        migration = await agents.migrationGeneratorAgent({ query, image, mimeType});
 
         // Execute migration
         response = await executeMigration(migration);

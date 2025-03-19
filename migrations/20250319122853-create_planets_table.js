@@ -1,26 +1,19 @@
+/**
+ * Migration to create the planets table.
+ */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('planets', {
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
       },
-      username: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
+      // Add other columns as needed
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -32,6 +25,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('planets');
   }
 };

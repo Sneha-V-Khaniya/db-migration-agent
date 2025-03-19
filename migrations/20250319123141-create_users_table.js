@@ -1,14 +1,11 @@
-/**
- * Migration description
- */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('orders', {
+    await queryInterface.createTable('users', {
       id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        primaryKey: true
       },
       createdAt: {
         allowNull: false,
@@ -21,6 +18,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('orders');
+    await queryInterface.dropTable('users');
   }
 };

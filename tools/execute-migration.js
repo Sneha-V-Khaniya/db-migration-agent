@@ -37,6 +37,10 @@ module.exports = async function (migrations) {
             // Create migration command
             const migrationCommand = `npx sequelize-cli migration:generate --name ${migration.migration_name}`;
 
+            console.log("migration::", migrationCommand);
+
+            let migrationFilePath;
+
             // Execute migration command
             await new Promise((resolve, reject) => {
                 exec(migrationCommand, (err, stdout, stderr) => {
@@ -70,7 +74,9 @@ module.exports = async function (migrations) {
                         return;
                     }
 
-                    const migrationFilePath = path.join(migrationDir, mostRecentFile);
+                    migrationFilePath = path.join(migrationDir, mostRecentFile);
+
+                    console.log("fileName::", migrationFilePath);
 
                     // Write the migration code to the file
                     try {
@@ -84,9 +90,11 @@ module.exports = async function (migrations) {
                 });
             });
 
+            const migrationFileName = path.basename(migrationFilePath, '.js');
+
             // Run migrations for the current file
             await new Promise((resolve, reject) => {
-                exec("npx sequelize-cli db:migrate", (err, stdout, stderr) => {
+                exec(`npx sequelize-cli db:migrate --name ${migrationFileName}`, (err, stdout, stderr) => {
                     if (err) {
                         console.error(`❌ Migration execution failed for ${migration.migration_name}: ${stderr}`);
                         reject({ error: "Migration execution failed", details: stderr });
