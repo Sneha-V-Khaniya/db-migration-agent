@@ -1,0 +1,7 @@
+
+    // const message = `Hey! ask user about db credentials to connect with the database in order to execute sequelize migrations.
+    //                  Ask for username, password, database, host, and dialect (mysql, postgres, etc.) in JSON format.`;
+
+ "query": "hey my db name is test_db, username is root, host is localhost, port is 26257, dialect is postgres"
+
+ 
