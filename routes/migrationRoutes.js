@@ -55,7 +55,7 @@ router.post("/migrate", upload.single('image'), async (req, res) => {
         }
 
         // const response = await generateAndExecuteMigration({ query, image: base64Image, mimeType: req.file.mimeType });
-        const response = await generateAndExecuteMigration({ query });
+        const response = await generateAndExecuteMigration({ query, isFromImage: base64Image ? true: false });
 
         res.send(response);
     } catch (error) {
